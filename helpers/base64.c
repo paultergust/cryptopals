@@ -2,6 +2,7 @@
 #include <openssl/bio.h>
 #include <openssl/evp.h>
 #include <openssl/buffer.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,21 +11,27 @@ char* base64Encode(const unsigned char* input, size_t length) {
   BUF_MEM *bufferPtr;
 
   b64 = BIO_new(BIO_f_base64());
-  bio = BIO_new(BIO_s_mem());
-  b64 = BIO_push(b64, bio);
   BIO_set_flags(b64, BIO_FLAGS_BASE64_NO_NL);
 
-  BIO_write(bio, input, length);
-  BIO_flush(bio);
+  bio = BIO_new(BIO_s_mem());
+
+  b64 = BIO_push(b64, bio);
+
+  BIO_write(b64, input, length);
+
+  BIO_flush(b64);
+
   BIO_get_mem_ptr(b64, &bufferPtr);
 
-  char* output = (char *)malloc(bufferPtr->length + 1);
-  memcpy(output, bufferPtr->data, bufferPtr->length);
-  output[bufferPtr->length] = '\0';
+  char *base64String = (char *)malloc(bufferPtr->length + 1);
 
-  BIO_free_all(bio);
+  memcpy(base64String, bufferPtr->data, bufferPtr->length);
 
-  return output;
+  base64String[bufferPtr->length] = '\0';
+
+  BIO_free(b64);
+
+  return base64String;
 }
 
 unsigned char* base64Decode(const char* input, size_t length) {
