@@ -1,12 +1,13 @@
 #include "hex.h"
 #include <stddef.h>
+#include <stdio.h>
 
 static int hex_digit_to_value(char hex_digit) {
   if (hex_digit >= '0' && hex_digit <= '9') {
     return hex_digit - '0';
   } else if (hex_digit >= 'A' && hex_digit <= 'F') {
     return hex_digit - 'A' + 10;
-  } else if (hex_digit >= 'a' && hex_digit <= 'a') {
+  } else if (hex_digit >= 'a' && hex_digit <= 'f') {
     return hex_digit - 'a' + 10;
   }
   return -1;
