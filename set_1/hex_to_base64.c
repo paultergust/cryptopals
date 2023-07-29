@@ -1,11 +1,7 @@
-#include <openssl/types.h>
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <openssl/bio.h>
-#include <openssl/evp.h>
-#include <openssl/buffer.h>
+#include "../helpers/base64.h"
 
 int hexStringToBinary(const char *hexString, unsigned char **binaryData, size_t *dataLength){
   int length = strlen(hexString);
@@ -23,37 +19,12 @@ int hexStringToBinary(const char *hexString, unsigned char **binaryData, size_t 
   return 1;
 }
 
-char* base64Encode(const unsigned char *data, size_t dataLength) {
-  BIO *bio, *b64;
-  BUF_MEM *bufferPtr;
-
-  b64 = BIO_new(BIO_f_base64());
-  BIO_set_flags(b64, BIO_FLAGS_BASE64_NO_NL);
-
-  bio = BIO_new(BIO_s_mem());
-
-  b64 = BIO_push(b64, bio);
-
-  BIO_write(b64, data, dataLength);
-
-  BIO_flush(b64);
-
-  BIO_get_mem_ptr(b64, &bufferPtr);
-
-  char *base64String = (char *)malloc(bufferPtr->length + 1);
-
-  memcpy(base64String, bufferPtr->data, bufferPtr->length);
-
-  base64String[bufferPtr->length] = '\0';
-
-  BIO_free(b64);
-
-  return base64String;
-}
-
-
-int main() {
-  const char *hexString = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
+int main(int argc, char* argv[]) {
+  if(argc < 2) {
+    printf("Missing hex string as argument\n");
+    return 1;
+  }
+  const char *hexString = argv[1];
   unsigned char *binaryData;
   size_t dataLength;
 
