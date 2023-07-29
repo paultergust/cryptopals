@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-char* base64_encode(const unsigned char* input, size_t length);
-unsigned char* base64_decode(const char* input, size_t length, size_t* output_length);
+char* base64Encode(const unsigned char* input, size_t length);
+unsigned char* base64Decode(const char* input, size_t length);
 
 #endif // !BASE64_H

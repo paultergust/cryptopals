@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* base64_encode(const unsigned char* input, size_t length) {
+char* base64Encode(const unsigned char* input, size_t length) {
   BIO *bio, *b64;
   BUF_MEM *bufferPtr;
 
@@ -27,11 +27,11 @@ char* base64_encode(const unsigned char* input, size_t length) {
   return output;
 }
 
-unsigned char* base64_decode(const char* input, size_t length, size_t* output_length) {
+unsigned char* base64Decode(const char* input, size_t length) {
   BIO *bio, *b64;
 
   unsigned char* buffer = (unsigned char*)malloc(length);
-  *output_length = 0;
+  size_t *output_length = 0;
 
   b64 = BIO_new(BIO_f_base64());
   bio = BIO_new_mem_buf(input, length);
