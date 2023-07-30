@@ -1,6 +1,4 @@
 #include "hex.h"
-#include <stddef.h>
-#include <stdio.h>
 
 static int hex_digit_to_value(char hex_digit) {
   if (hex_digit >= '0' && hex_digit <= '9') {
