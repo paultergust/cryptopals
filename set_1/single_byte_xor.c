@@ -1,12 +1,28 @@
-#include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <regex.h>
 
 void single_byte_xor(const unsigned char *input, size_t length, char* result, unsigned char key) {
   for(size_t i = 0; i < length; i++) {
     result[i] = input[i] ^ key;
   }
   result[length] = '\0';
+}
+
+int remove_invalid_chars(char *input) {
+  regex_t regex;
+  char* pattern = "[\x00-\x1F]+";
+  int reti = regcomp(&regex, pattern, 0);
+  if (reti) {
+    fprintf(stderr, "Error compiling regex\n");
+    exit(1);
+  }
+  reti = regexec(&regex, input, 0, NULL, 0);
+  if (!reti) {
+    return 1;
+  }
+  return 0;
 }
 
 int main(int argc, char* argv[]) {
@@ -25,6 +41,7 @@ int main(int argc, char* argv[]) {
   }
 
   char result[input_length];
+  // #TODO refactor this to single loop
   for (unsigned char key = 0; key <= 254; key++) {
     single_byte_xor(encrypted_bytes, input_length, result, key);
     printf("Key: 0x%02x -  %s\n", key, result);
