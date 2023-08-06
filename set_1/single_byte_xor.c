@@ -1,25 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-void single_byte_xor(const unsigned char *input, size_t length, char* result, unsigned char key) {
-  for(size_t i = 0; i < length; i++) {
-    result[i] = input[i] ^ key;
-  }
-  result[length] = '\0';
-}
-
-int contains_invalid_characters(const char *input) {
-  // limit to 100 chars lest it runs for too long
-  int limitCounter = 100;
-  while (*input != '\0' && limitCounter > 0) {
-    if (*input < 32 || *input > 126) {
-      return 1;
-    }
-    limitCounter--;
-  }
-  return 0;
-}
+#include "../helpers/xor.h"
 
 int main(int argc, char* argv[]) {
   if (argc < 2) {

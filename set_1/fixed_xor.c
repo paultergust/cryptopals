@@ -3,13 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../helpers/hex.h"
+#include "../helpers/xor.h"
 
-
-void xor_buffers(unsigned char* buffer1, unsigned char* buffer2, unsigned char* result, size_t length) {
-  for (size_t i = 0; i < length; i++) {
-    result[i] = buffer1[i] ^ buffer2[i];
-  }
-}
 
 int main(int argc, char* argv[]) {
   if (argc != 3) {
