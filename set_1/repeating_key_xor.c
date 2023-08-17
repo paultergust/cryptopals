@@ -14,7 +14,7 @@ void repeating_key_xor(const char* buffer, unsigned char* result, const char* ke
 
 int main(int argc, char* argv[]) {
   if (argc < 2) {
-    printf("Missing arguments: STR, KEY");
+    printf("Missing arguments: STR, KEY\n");
     return 1;
   }
 
@@ -23,10 +23,10 @@ int main(int argc, char* argv[]) {
   int length = strlen(str);
   char result[length];
 
-  repeating_key_xor(str, result, key);
+  repeating_key_xor(str, (unsigned char*)result, key);
   //TODO convert the result back to hex
   char output[length*2];
-  binary_to_hex(result, strlen(result), output, length*2);
-  printf("%s \n", output);
+  binary_to_hex((unsigned char*)result, strlen(result), output, length*2);
+  printf("%s\n", output);
   return 0;
 }
