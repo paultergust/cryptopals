@@ -16,6 +16,22 @@
 // solve each block as if it was a single character XOR, you already have the code to do this
 // for each block, the single byte xor key that produces the best looking histogram is te repeating key xor key byte for that block. Put them together and you have the key.
 
+void str_to_bin(const char* input, int* output);
+int hamming_distance(char* buffer_one, char* buffer_two, int length);
+int ham_and_norm(char* buffer_one, char* buffer_two, int length);
+void iter_keysize();
+
+int main(int argc, char *argv[]){
+  //if (argc < 2) {
+    //printf("Missing arguments: string 1 and string 2");
+    //return 1;
+  //}
+  char* buffer_one = "wokka wokka!!!";
+  char* buffer_two = "this is a test";
+  int dist = hamming_distance(buffer_one, buffer_two, strlen(buffer_one));
+  printf("%d\n", dist);
+}
+
 void str_to_bin(const char* input, int* output) {
   size_t length = strlen(input);
   for (size_t i = 0; i < length; i++) {
@@ -42,16 +58,5 @@ int hamming_distance(char* buffer_one, char* buffer_two, int length){
 int ham_and_norm(char* buffer_one, char* buffer_two, int length) {
   int dist = hamming_distance(buffer_one, buffer_two, length);
   return dist / length;
-}
-
-int main(int argc, char *argv[]){
-  //if (argc < 2) {
-    //printf("Missing arguments: string 1 and string 2");
-    //return 1;
-  //}
-  char* buffer_one = "wokka wokka!!!";
-  char* buffer_two = "this is a test";
-  int dist = hamming_distance(buffer_one, buffer_two, strlen(buffer_one));
-  printf("%d\n", dist);
 }
 
