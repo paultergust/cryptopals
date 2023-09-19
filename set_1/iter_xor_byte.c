@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../helpers/xor.h"
+#include "helpers/xor.h"
 
 int main(int argc, char* argv[]){
   if (argc < 2) {

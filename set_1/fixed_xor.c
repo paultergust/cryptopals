@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../helpers/hex.h"
-#include "../helpers/xor.h"
+#include "helpers/hex.h"
+#include "helpers/xor.h"
 
 
 int main(int argc, char* argv[]) {
