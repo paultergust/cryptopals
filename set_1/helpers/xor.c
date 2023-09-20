@@ -1,6 +1,6 @@
 #include "xor.h"
 
-void single_byte_xor(const unsigned char *input, size_t length, char* result, unsigned char key) {
+void byte_xor(const unsigned char *input, size_t length, char* result, unsigned char key) {
   for(size_t i = 0; i < length; i++) {
     result[i] = input[i] ^ key;
   }
