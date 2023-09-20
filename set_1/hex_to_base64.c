@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../helpers/base64.h"
+#include "helpers/base64.h"
 
-int hexStringToBinary(const char *hexString, unsigned char **binaryData, size_t *dataLength){
+int hex_string_to_binary(const char *hexString, unsigned char **binaryData, size_t *dataLength){
   int length = strlen(hexString);
   if (length % 2 != 0) {
     // Hex should have even length
@@ -19,24 +19,16 @@ int hexStringToBinary(const char *hexString, unsigned char **binaryData, size_t 
   return 1;
 }
 
-int main(int argc, char* argv[]) {
-  if(argc < 2) {
-    printf("Missing hex string as argument\n");
-    return 1;
-  }
-  const char *hexString = argv[1];
+int hex_to_base64(char* hexString, char* base64String) {
   unsigned char *binaryData;
   size_t dataLength;
 
-  if (!hexStringToBinary(hexString, &binaryData, &dataLength)) {
-    printf("Invalid hex string \n");
-    return 1;
+  if (!hex_string_to_binary(hexString, &binaryData, &dataLength)) {
+    return 0;
   }
 
-  char *base64String = base64Encode(binaryData, dataLength);
-  printf("Base64: %s\n", base64String);
+  base64String = base64Encode(binaryData, dataLength);
 
   free(binaryData);
-  free(base64String);
-  return 0;
+  return 1;
 }

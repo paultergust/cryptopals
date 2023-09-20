@@ -21,17 +21,6 @@ int hamming_distance(char* buffer_one, char* buffer_two, int length);
 int ham_and_norm(char* buffer_one, char* buffer_two, int length);
 void iter_keysize();
 
-int main(int argc, char *argv[]){
-  //if (argc < 2) {
-    //printf("Missing arguments: string 1 and string 2");
-    //return 1;
-  //}
-  char* buffer_one = "wokka wokka!!!";
-  char* buffer_two = "this is a test";
-  int dist = hamming_distance(buffer_one, buffer_two, strlen(buffer_one));
-  printf("%d\n", dist);
-}
-
 void str_to_bin(const char* input, int* output) {
   size_t length = strlen(input);
   for (size_t i = 0; i < length; i++) {
