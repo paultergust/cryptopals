@@ -11,7 +11,7 @@ static int hex_digit_to_value(char hex_digit) {
   return -1;
 }
 
-size_t hex_to_binary(const char* hex_input, size_t hex_length, unsigned char* binary_output, size_t bin_length) {
+size_t hex_to_binary(const char* hex_input, size_t hex_length, char* binary_output, size_t bin_length) {
   if (hex_input == NULL || binary_output == NULL) {
     return 0;
   }
@@ -33,7 +33,7 @@ size_t hex_to_binary(const char* hex_input, size_t hex_length, unsigned char* bi
   return output_index;
 }
 
-size_t binary_to_hex(const unsigned char* binary_input, size_t binary_length, char* hex_output, size_t hex_length) {
+size_t binary_to_hex(const char* binary_input, size_t binary_length, char* hex_output, size_t hex_length) {
   if (binary_input == NULL || hex_output == NULL) {
     return 0;
   }
@@ -42,7 +42,7 @@ size_t binary_to_hex(const unsigned char* binary_input, size_t binary_length, ch
   size_t output_index = 0;
 
   while (input_index < binary_length && output_index + 2 <= hex_length) {
-    unsigned char byte = binary_input[input_index++];
+    char byte = binary_input[input_index++];
     hex_output[output_index++] = "0123456789ABCDEF"[byte >> 4];
     hex_output[output_index++] = "0123456789ABCDEF"[byte & 0x0F];
   }

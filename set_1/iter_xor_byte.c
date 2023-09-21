@@ -16,7 +16,7 @@ int iter_single_xor(char* filename){
     char result[len];
     printf("Hash number %d \n", counter++);
     for (unsigned char key = 0; key <= 254; key++) {
-      single_byte_xor(line, len, result, key);
+      byte_xor(line, len, result, key);
       if(!contains_invalid_characters(result)) {
         printf("Key: 0x%02x -  %s\n", key, result);
       }
