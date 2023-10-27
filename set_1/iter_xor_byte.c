@@ -26,5 +26,6 @@ int iter_single_xor(char* filename){
   fclose(fp);
   if (line)
     free(line);
-  return 1;
+  exit(EXIT_SUCCESS);
 }
+
